@@ -1,9 +1,10 @@
 // import React from "react";
 import styles from "./index.module.css";
+import {useLocalStorage} from "usehooks-ts";
 
 
 function CreateTodo() {
-// const [todo, setTodo] = React.useState("");
+const [todo, setTodo] = useLocalStorage("TODO_KEY", []);
 
 let todo;
 
@@ -12,11 +13,12 @@ function collectInput(event) {
 
  function saveTodo () {
     // Get existing list of todos from local storage
-    let todos = JSON.parse(localStorage.getItem("TODO_KEY")) || [];
+    // let todos = JSON.parse(localStorage.getItem("TODO_KEY")) || [];
     //Add new todo to existing list of todos
-    todos.push(todo);
+    // todos.push(todo);
     //Set all todos in local storage
-  localStorage.setItem("TODO_KEY", JSON.stringify (todos));
+//   localStorage.setItem("TODO_KEY", JSON.stringify (todos));
+setTodos{[...todos, todo]};
  }               
 
     return (
