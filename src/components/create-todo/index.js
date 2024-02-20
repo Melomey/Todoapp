@@ -1,33 +1,25 @@
 // import React from "react";
 import styles from "./index.module.css";
-import {useLocalStorage} from "usehooks-ts";
+import { useLocalStorage } from "usehooks-ts";
+import { useState } from "react";
+
 
 
 function CreateTodo() {
-const [todo, setTodo] = useLocalStorage("TODO_KEY", []);
+    const [todos, setTodos] = useLocalStorage("TODO_KEY", []);
 
-let todo;
 
-function collectInput(event) {
-    todo = event.target.value;}
+    const [todo, setTodo] = useState("");
 
- function saveTodo () {
-    // Get existing list of todos from local storage
-    // let todos = JSON.parse(localStorage.getItem("TODO_KEY")) || [];
-    //Add new todo to existing list of todos
-    // todos.push(todo);
-    //Set all todos in local storage
-//   localStorage.setItem("TODO_KEY", JSON.stringify (todos));
-setTodos{[...todos, todo]};
- }               
+
 
     return (
         <section className={styles.createTodoSection}>
-            <input 
-            onChange={collectInput} 
-            className={styles.createTodoInput} 
-            placeholder="start typing...." />
-            <button onClick={saveTodo}>Create</button>
+            <input
+                onChange={event => setTodo(event.target.value)}
+                className={styles.createTodoInput}
+                placeholder="start typing...." />
+            <button onClick={() => setTodos([...todos, todo])}>Create</button>
         </section>
     );
 
