@@ -1,6 +1,6 @@
 
 
-function TodoItem(index,todo) {
+function TodoItem({index,todo}) {
     return (
         <li className="list-group-item"
             key={index}>
@@ -13,8 +13,9 @@ function TodoItem(index,todo) {
                 className="form-check-label"
                 for={index}
             >{todo}</label>
+            
         </li>
     );
 }
 
-export default TodoList;
+export default TodoItem;
