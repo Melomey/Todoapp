@@ -1,18 +1,28 @@
 // import React from "react";
 import styles from "./index.module.css";
-import { useLocalStorage } from "usehooks-ts";
 import { useState } from "react";
 
 
 
 function CreateTodo() {
-    const [todos, setTodos] = useLocalStorage("TODO_KEY", []);
     const [todo, setTodo] = useState("");
 
-    const saveTodos = () => {
-        // save all todos
-        setTodos([...todos, todo]);
-        //Wipe the input box
+    const saveTodos = async () => {
+        // post todo to the todo-api
+        const response = await fetch('http://localhost:4000/todos', {
+            method: "POST", 
+            body: JSON.stringify({
+                title: todo
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+                
+            }
+        });
+        const data = await response.json();
+            console.log(data);
+        
+         //Wipe the input box
         setTodo("");
     }
 
@@ -20,7 +30,7 @@ function CreateTodo() {
         <section className={styles.createTodoSection}>
             <input
             value={todo}
-            onKeyDown={event => event.key == "Enter" && saveTodos([...todos, todo])}
+            onKeyDown={event => event.key == "Enter" && saveTodos([...todo, todo])}
             
                 onChange={event => setTodo(event.target.value)}
                 className={styles.createTodoInput}
